@@ -7,6 +7,8 @@ import { TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from '../styles/';
 import Card from '../components/Card';
 import { getDeviceApi } from '../api/devices';
+import { getDevice } from '../api/getDevice';
+import { getUserIdApi } from '../api/userId';
 
 function Panel() {
     const [dn, setdn] = useState('')
@@ -14,17 +16,30 @@ function Panel() {
     const [isLoading, setIsLoading] = useState(true)
     const [devices, setDevices] = useState()
     const {addDevice} = getDataDB()
-    useEffect(() => {
-        ( async () =>{
-            const device = await getDeviceApi()
 
-            // const arrayDevice = JSON.parse(device)
-            setDevices(device)
+    // ASYNC STORAGE
+    // useEffect(() => {
+    //     ( async () =>{
+    //         const device = await getDeviceApi()
+
+    //         // const arrayDevice = JSON.parse(device)
+    //         setDevices(device)
+    //         setIsLoading(false)
+    //       })()
+    // }, [])
+    useEffect(() => {
+        // const clientId = 40;
+        ( async () =>{
+            const data = await getDeviceApi()
+            const user_id = data[0].user_id
+
+            const {devices} = await getDevice(user_id)
+            setDevices(devices)
             setIsLoading(false)
-          })()
+          })()  
     }, [])
-    console.log(devices)
     
+    // console.log(devices)
 // return false
     if (isLoading) {
         return (
