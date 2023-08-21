@@ -5,7 +5,7 @@ export async function rechargeStripe(number, tarjeta, offerID, client_id){
                     offerID,
                     client_id
                 })
-                console.log(body)
+                // console.log(body)
     try {
         const response = await fetch('https://apps-ws.spot1.mx/paymentStripe', {
             method: 'POST',
@@ -20,10 +20,10 @@ export async function rechargeStripe(number, tarjeta, offerID, client_id){
             })
         }) 
         let data = await response.json();
-        console.log(data)
+        // console.log(data)
         return data;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return false;
     }
 }

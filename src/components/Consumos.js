@@ -11,11 +11,8 @@ function Consumos({type, phone, dateStart, dateEnd}) {
   const consultConsums = async () => {
     const response = await consultCdrs(type, phone, dateStart, dateEnd);
     {for (let i = 0; i < response.length; i++) {
-      console.log('====================================');
-      console.log(response[i].consumos);
-      console.log('====================================');
+      // console.log(response[i].consumos);
       consum.push(
-        
         <View style={styles.contentOptions}>
           <View style={[styles.consumosContainer]}>
             <View style={[styles.consumosHeader]}>
@@ -54,14 +51,14 @@ function Consumos({type, phone, dateStart, dateEnd}) {
 }
 
 const styles = StyleSheet.create({
-  line:{
-    position:'absolute',
-    top:'-72%',
-    height:'242%',
-    left: '15%',
-    width: 3,
-    backgroundColor:'#aaaaaa'
-  },
+  // line:{
+  //   position:'absolute',
+  //   top:'-72%',
+  //   height:'242%',
+  //   left: '15%',
+  //   width: 3,
+  //   backgroundColor:'#aaaaaa'
+  // },
   contentOptions:{
     position:'relative',
     flex: 1,    

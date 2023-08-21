@@ -5,8 +5,7 @@ export async function consultCdrs(type, phone, dateStart, dateEnd){
         dateStart,
         dateEnd,
     })
-    console.log(url);
-
+    // console.log(url);
     try {
         const response = await (await fetch(url)).json();
         return response
