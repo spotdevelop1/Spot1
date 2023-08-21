@@ -38,13 +38,13 @@ const TabsIndroid= () => {
       tabBarIcon: ({}) =>{
         let iconName = ''
         switch (route.name) {
-          case 'Panel':
+          case 'Inicio':
             iconName = 'home-outline'         
             break;
           case 'Recargas':
             iconName = 'cash-outline'
             break;
-          case 'EstadoCuenta':
+          case 'Estado de Cuenta':
             iconName = 'document-text-outline'
             break;
         }
@@ -55,10 +55,10 @@ const TabsIndroid= () => {
       activeColor="#2D4C89"
       inactiveColor="#3e2465"
       barStyle={{ backgroundColor: '#FFFFFF' }}>
-      <Tab.Screen  name="Panel"  component={Panel} />
+      <Tab.Screen  name="Inicio"  component={Panel} />
       {/* <Tab.Screen name="Recargas" component={Recargas} /> */}
-      <Tab.Screen name="RechargePrueba"  component={RechargePrueba} />
-      <Tab.Screen name="EstadoCuenta" component={EstadoCuenta } />
+      <Tab.Screen name="Recargas"  component={RechargePrueba} />
+      <Tab.Screen name="Estado de Cuenta" component={EstadoCuenta } />
     </Tab.Navigator>
   );
 }
@@ -71,13 +71,13 @@ const TabsIos = () => {
       tabBarIcon: ({}) =>{
         let iconName = ''
         switch (route.name) {
-          case 'Panel':
+          case 'Inicio':
             iconName = 'home-outline'         
             break;
           case 'Recargas':
             iconName = 'cash-outline'
             break;
-          case 'EstadoCuenta':
+          case 'Estado de Cuenta':
             iconName = 'document-text-outline'
             break;
         }
@@ -85,10 +85,10 @@ const TabsIos = () => {
       },
       
     })}>
-      <BottomTabIos.Screen  name="Panel" options={{headerShown:false}} component={Panel} />
+      <BottomTabIos.Screen  name="Inicio" options={{headerShown:false}} component={Panel} />
       {/* <BottomTabIos.Screen name="Recargas" component={Recargas} /> */}
       <Tab.Screen name="Recargas" options={{headerShown:false}}  component={RechargePrueba} />
-      <BottomTabIos.Screen name="EstadoCuenta" options={{headerShown:false}}  component={EstadoCuenta } />
+      <BottomTabIos.Screen name="Estado de Cuenta" options={{headerShown:false}}  component={EstadoCuenta } />
     </BottomTabIos.Navigator>
   );
 }
