@@ -1,26 +1,17 @@
 import React, { useState } from 'react'
 import { Button, StyleSheet, View ,Text, ScrollView} from 'react-native';
-// import CircularProgress from 'react-native-circular-progress-indicator';
+import CircularProgress from 'react-native-circular-progress-indicator';
 import { globalStyle } from '../styles/'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native';
 
 export function ModalConsumo ({datosConsumidos, datosRestantes, closeModal, status, dateActivate,datosTotal, datos})  {
-    console.log(datos +' MODAL')
-    // const [imeiDis, setImeiDis] = useState(imei)
-    // useState
+    const navigation = useNavigation();
   return (
     <View style={styles.modalConsumos}>
         <View style={styles.contentConsumos}>
             <ScrollView>
                 <View style={styles.devicePlan}>
-                    {/* <View style={{marginBottom:10}}>
-                        <Text style={[styles.text, styles.textplanDevice]}>Dispositivo</Text>
-                        <Text style={styles.text}>MIFI HOSPOT INTERNET CASA HOGAR</Text>
-                    </View> */}
-                    {/* <View>
-                        <Text style={[styles.text, styles.textplanDevice]}>Plan</Text>
-                        <Text style={styles.text}>{imei}</Text>
-                    </View> */}
                 </View>
                 <View style={styles.bodyConsumos}>
                     <View style={styles.infodateStatus}>
@@ -32,20 +23,33 @@ export function ModalConsumo ({datosConsumidos, datosRestantes, closeModal, stat
                             <Text style={styles.textBody}>Estado</Text>
                             <Text style={styles.text}>{status}</Text>
                         </View>
-                        {/* <View>
-                            <Text style={styles.textBody}>Velocidad</Text>
-                            <Text style={styles.text}>10 mbs</Text>
-                        </View> */}
 
                     </View>
-                    {/* <View style={[styles.dataConsumo]}>
+                    {
+                        datos.length > 0 ?
+                        <View style={[styles.dataConsumo]}>
                         
-                                    <Text style={[styles.textBody, {fontSize:25}]}>Consumos: </Text>
-                                <View style={{alignContent: 'space-between', flexDirection:'column', marginTop:20, alignItems: 'center'}}>
+                            <Text style={[styles.textBody, {fontSize:25}]}>Consumos: </Text>
+                            <View style={styles.infodateStatus}>
+                            
+                                <View>
+                                    <Text style={styles.textBody}>Contratado</Text>
+                                    <Text style={styles.text}>{datosTotal.toFixed(2)} Gb</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.textBody}>Consumo</Text>
+                                    <Text style={styles.text}>{datosConsumidos.toFixed(2)} GB</Text>
+                                </View>
+                                <View>
+                                    <Text style={styles.textBody}>Restante </Text>
+                                    <Text style={styles.text}>{datosRestantes.toFixed(2)} GB</Text>
+                                </View>
+                            </View>
+                            <View style={{alignContent: 'space-between', flexDirection:'column', marginTop:20, alignItems: 'center'}}>
 
-                                    {
-                                        datos.map((dato) =>{
-                                            return  <View style={{marginBottom:10}}>
+                                {
+                                    datos.map((dato) =>{
+                                        return  <View style={{marginBottom:10}}>
                                             <CircularProgress
                                             value={dato.freePercentage}
                                             radius={80}
@@ -55,33 +59,24 @@ export function ModalConsumo ({datosConsumidos, datosRestantes, closeModal, stat
                                             title={dato.name}
                                             titleColor={'#2D4C89'}
                                             titleStyle={{fontWeight: 'bold', fontSize:11}}
-                                            />
+                                            /> 
                                         </View>
-                                          })
-                                    }
-                                </View>
-                        <View style={styles.infodateStatus}>
-                        
-                            <View>
-                                <Text style={styles.textBody}>Contratado</Text>
-                                <Text style={styles.text}>{datosTotal.toFixed(2)} Gb</Text>
+                                    })
+                                }
                             </View>
-                            <View>
-                                <Text style={styles.textBody}>Consumo</Text>
-                                <Text style={styles.text}>{datosConsumidos.toFixed(2)} GB</Text>
-                            </View>
-                            <View>
-                                <Text style={styles.textBody}>Restante </Text>
-                                <Text style={styles.text}>{datosRestantes.toFixed(2)} GB</Text>
-                            </View>
+                            
+                        </View> : 
+                        <View style={{justifyContent:'center', marginVertical: 80, marginHorizontal:15}}>
+                            <Text style={{color:'red', fontSize:25}}>No cuenta con un plan.</Text>
+                            <Icon.Button name='arrow-back-outline' onPress={()=>{navigation.navigate('Recargas'), closeModal()}}>Recargar</Icon.Button>
                         </View>
-                    </View> */}
+                    }
+                    
                 </View>
             </ScrollView>
         </View>
         <View style={styles.btns}>
-            <Icon.Button style={{backgroundColor:'red', height:40}} name='arrow-back-outline' onPress={() => closeModal()}>Regresar</Icon.Button>
-            {/* <Icon.Button name='cart-outline' onPress={() => setModalConsumo()}>Recargar</Icon.Button> */}
+            <Icon.Button style={{backgroundColor:'red', height:40, }} name='arrow-back-outline' onPress={() => closeModal()}>Regresar</Icon.Button>
         </View>
     </View>
   )
