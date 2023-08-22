@@ -25,9 +25,9 @@ function DownloadDailyConsumption({type, phone, dateStart, dateEnd}) {
     const createPdf = async () => {     
         await searchConsumo()
         const pdfHtml = await PdfConsumption(Consumos, phone)
-        console.log('====================================');
-        console.log(pdfHtml);
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log(pdfHtml);
+        // console.log('====================================');
         const options = {
             html: pdfHtml,
             fileName: 'Consumos',
@@ -44,31 +44,37 @@ function DownloadDailyConsumption({type, phone, dateStart, dateEnd}) {
 
 
     const askPermission = () => {
-        async function requestExternalWritePermission() {
-          try {
-            const granted = await PermissionsAndroid.request(
-              PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-              {
-                title: 'Permisos para descargas dentro del la app',
-                message:
-                  'Para descargar este archivo necesitas conder permiso.',
-              }
-            );
-            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                createPdf();
-            } else {
-              alert('WRITE_EXTERNAL_STORAGE permission denied');
-            }
-          } catch (err) {
-            alert('Write permission err', err);
-            console.warn(err);
-          }
-        }
-        if (Platform.OS === 'android') {
-          requestExternalWritePermission();
-        } else {
-            createPdf();
-        }
+        createPdf();
+
+        // async function requestExternalWritePermission() {
+        //   try {
+        //     const granted = await PermissionsAndroid.request(
+        //         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        //         {
+        //             title: 'Permisos para descargas dentro del la app',
+        //             message: 'Para descargar este archivo necesitas conder permiso.',
+        //             buttonNegative: 'Cancel',
+        //             buttonPositive: 'OK',
+        //         },
+        //     );
+        //     console.log('====================================');
+        //     console.log(granted);
+        //     console.log('====================================');
+        //     // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        //     //     createPdf();
+        //     // } else {
+        //     //   alert('WRITE_EXTERNAL_STORAGE permission denied');
+        //     // }
+        //   } catch (err) {
+        //     alert('Write permission err', err);
+        //     console.warn(err);
+        //   }
+        // }
+        // if (Platform.OS === 'android') {
+        //   requestExternalWritePermission();
+        // } else {
+        //     createPdf();
+        // }
     }
 
     const openFile = (filepath) => {
