@@ -6,6 +6,7 @@ import Carousel from 'react-native-snap-carousel';
 import { TextInput } from 'react-native-gesture-handler';
 import { globalStyle } from '../styles/';
 import Card from '../components/Card';
+import BtnRulet from '../components/BtnRulet';
 import { getDeviceApi } from '../api/devices';
 import { getDevice } from '../api/getDevice';
 import { getUserIdApi } from '../api/userId';
@@ -17,6 +18,9 @@ function Panel() {
     const [devices, setDevices] = useState()
     const {addDevice} = getDataDB()
 
+    const d = new Date();
+    let day = d.getDay();
+  
     // ASYNC STORAGE
     // useEffect(() => {
     //     ( async () =>{
@@ -36,11 +40,14 @@ function Panel() {
             const {devices} = await getDevice(user_id)
             setDevices(devices)
             setIsLoading(false)
+            console.log('====================================');
+            console.log(devices);
+            console.log('====================================');
           })()  
     }, [])
     
     // console.log(devices)
-// return false
+    // return false
     if (isLoading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
@@ -79,18 +86,23 @@ function Panel() {
                     devices.length === 0 ? <Text>Aún no cuenta con dispositivos</Text> :
                     <View style={{flex: 1}}>
                         <Carousel
-                        sliderWidth={Dimensions.get('window').width}
-                        itemWidth={Dimensions.get('window').width/1.3}
-                        data={devices}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({item}) => {return(
-                            <Card device={item} item={item} ></Card>
-                        )}}
-                        
+                            sliderWidth={Dimensions.get('window').width}
+                            itemWidth={Dimensions.get('window').width/1.3}
+                            data={devices}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({item}) => {
+                                return(
+                                    <Card device={item} item={item} ></Card>
+                                )}
+                        }
                         />
+                        {/* <BtnRulet device={devices[0]} /> */}
+                        {
+                            day === 3 ? <BtnRulet device={devices[0]} /> : null
+                        }
                     </View>
-
-                }    
+                    
+                }  
             </View>
         </View>
      );

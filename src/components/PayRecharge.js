@@ -75,9 +75,9 @@ export function PayRecharge ({closeModal, number, userId}){
         }else{
             const response = await rechargeStripe(number, tarjeta.id, selectedValue, userId);
             setLoader()
-            if (response.http_code == 1) {
+            if (response["http_code"] == 1) {
                 Alert.alert('Info', response.message);       
-            }if(response.http_code == 0){
+            }if(response["http_code"] == 0){
                 Alert.alert('Info', response.message);       
             }else{
                 Alert.alert('Info', response.message);       
